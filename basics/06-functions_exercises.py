@@ -25,17 +25,17 @@ def arrayCheck(nums):
     for num in nums:
         if num == 1:
             counter = 1
-        elif num == 2 and counter = 1:
+        elif num == 2 and counter == 1:
             counter = 2
-        elif num == 3 and counter = 2:
+        elif num == 3 and counter == 2:
             return True
         else:
             counter = 0
     return False
 
-arrayCheck([1, 1, 2, 3, 1])
-arrayCheck([1, 1, 2, 4, 1])
-arrayCheck([1, 1, 2, 1, 2, 3])
+print(arrayCheck([1, 1, 2, 3, 1]))
+print(arrayCheck([1, 1, 2, 4, 1]))
+print(arrayCheck([1, 1, 2, 1, 2, 3]))
 
 
 #####################
@@ -53,7 +53,11 @@ arrayCheck([1, 1, 2, 1, 2, 3])
 
 def stringBits(str):
   # CODE GOES HERE
+  return str[::2]
 
+print(stringBits('Hello'))
+print(stringBits('Hi'))
+print(stringBits('Heeololeo'))
 
 #####################
 ## -- PROBLEM 3 -- ##
@@ -74,6 +78,19 @@ def stringBits(str):
 
 def end_other(a, b):
   # CODE GOES HERE
+  a_lower = a.lower()
+  b_lower = b.lower()
+  if len(a_lower) > len(b_lower):
+      diff = len(a_lower) - len(b_lower)
+      return b_lower == a_lower[diff:]
+  else:
+      diff = len(b_lower) - len(a_lower)
+      return a_lower == b_lower[diff:]
+
+print(end_other('Hiabc', 'abc'))
+print(end_other('AbC', 'HiaBc'))
+print(end_other('abc','AbCd'))
+print(end_other('abc', 'abc'))
 
 #####################
 ## -- PROBLEM 4 -- ##
@@ -86,8 +103,16 @@ def end_other(a, b):
 # doubleChar('AAbb') → 'AAAAbbbb'
 # doubleChar('Hi-There') → 'HHii--TThheerree'
 
-def doubleChar(str):
+def doubleChar(input):
   # CODE GOES HERE
+  out = ''
+  for char in input:
+      out = out + char*2
+  return out
+
+print(doubleChar('The'))
+print(doubleChar('AAbb'))
+print(doubleChar('Hi-There'))
 
 
 #####################
@@ -113,8 +138,19 @@ def doubleChar(str):
 
 def no_teen_sum(a, b, c):
   # CODE GOES HERE
+  return fix_teen(a) + fix_teen(b) + fix_teen(c)
+
 def fix_teen(n):
   # CODE GOES HERE
+  if n in [13,14,17,18,19]:
+      return 0
+  else:
+      return n
+
+print(no_teen_sum(1, 2, 3))
+print(no_teen_sum(2, 13, 1))
+print(no_teen_sum(2, 15, 1))
+print(no_teen_sum(2, 1, 14))
 
 #####################
 ## -- PROBLEM 6 -- ##
@@ -130,3 +166,12 @@ def fix_teen(n):
 
 def count_evens(nums):
   # CODE GOES HERE
+  output = 0
+  for num in nums:
+      if num % 2 == 0:
+          output = output + 1
+  return output
+
+print(count_evens([2, 1, 2, 3, 4]))
+print(count_evens([2, 2, 0]))
+print(count_evens([1, 3, 5]))
