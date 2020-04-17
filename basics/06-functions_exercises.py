@@ -80,12 +80,15 @@ def end_other(a, b):
   # CODE GOES HERE
   a_lower = a.lower()
   b_lower = b.lower()
-  if len(a_lower) > len(b_lower):
-      diff = len(a_lower) - len(b_lower)
-      return b_lower == a_lower[diff:]
-  else:
-      diff = len(b_lower) - len(a_lower)
-      return a_lower == b_lower[diff:]
+  # if len(a_lower) > len(b_lower):
+  #     diff = len(a_lower) - len(b_lower)
+  #     return b_lower == a_lower[diff:]
+  # else:
+  #     diff = len(b_lower) - len(a_lower)
+  #     return a_lower == b_lower[diff:]
+
+  # return (b_lower.endswith(a_lower) or a_lower.endswith(b_lower))
+  return (a_lower[-len(b_lower):] == b_lower or b_lower[-len(a_lower):] == a_lower)
 
 print(end_other('Hiabc', 'abc'))
 print(end_other('AbC', 'HiaBc'))
@@ -107,7 +110,7 @@ def doubleChar(input):
   # CODE GOES HERE
   out = ''
   for char in input:
-      out = out + char*2
+      out += char*2
   return out
 
 print(doubleChar('The'))
@@ -175,3 +178,7 @@ def count_evens(nums):
 print(count_evens([2, 1, 2, 3, 4]))
 print(count_evens([2, 2, 0]))
 print(count_evens([1, 3, 5]))
+
+
+mystring = "abcde"
+print(mystring[-3::1])
