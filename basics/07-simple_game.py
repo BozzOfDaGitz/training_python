@@ -2,7 +2,7 @@ import random
 import time
 import sys
 
-def generate_feedback(guess):
+def generate_feedback(guess, code):
     """
     Generates feedback for the codebreaker game.
     NV: input code is not valid
@@ -25,49 +25,53 @@ def generate_feedback(guess):
 
 
 
-playing = True
-sys.stdout.write('\nGenerating random 3 digit code of numbers')
-sys.stdout.flush()
-time.sleep(0.5)
-sys.stdout.write('.')
-sys.stdout.flush()
-time.sleep(0.5)
-sys.stdout.write('.')
-sys.stdout.flush()
-time.sleep(0.5)
-sys.stdout.write('.')
-sys.stdout.flush()
-time.sleep(0.5)
-sys.stdout.write('.')
-sys.stdout.flush()
-time.sleep(0.5)
-sys.stdout.write('.\n')
+def main():
+    playing = True
+    sys.stdout.write('\nGenerating random 3 digit code of numbers')
+    sys.stdout.flush()
+    time.sleep(0.5)
+    sys.stdout.write('.')
+    sys.stdout.flush()
+    time.sleep(0.5)
+    sys.stdout.write('.')
+    sys.stdout.flush()
+    time.sleep(0.5)
+    sys.stdout.write('.')
+    sys.stdout.flush()
+    time.sleep(0.5)
+    sys.stdout.write('.')
+    sys.stdout.flush()
+    time.sleep(0.5)
+    sys.stdout.write('.\n')
 
-code = []
-for num in range(0,3):
-    code.append(str(random.randint(0,9)))
+    nums = [str(num) for num in range(0,10)]
+    random.shuffle(nums)
+    code = nums[:3]
 
-print('...code generated. Good luck guessing! \n')
+    print('...code generated. Good luck guessing! \n')
 
-while playing:
-    guess = input('What is your guess (enter exit to stop playing)? ')
+    while playing:
+        guess = input('What is your guess (enter exit to stop playing)? ')
 
-    if list(guess) == code:
-        print('\nYOU WON!!!\n')
-        break
+        if list(guess) == code:
+            print('\nYOU WON!!!\n')
+            break
 
-    if guess == 'exit':
-        break
-    if guess == 'solve':
-        print(code)
-        continue
+        if guess == 'exit':
+            break
+        if guess == 'solve':
+            print(code)
+            continue
 
-    if len(guess) != 3:
-        print('Please enter a three digit code of numbers.\n')
-        continue
+        if len(guess) != 3:
+            print('Please enter a three digit code of numbers.\n')
+            continue
 
-    feedback = generate_feedback(guess)
-    if feedback == 'NV':
-        continue
-    else:
-        print("\nHere's your clue: {}\n".format(feedback))
+        feedback = generate_feedback(guess, code)
+        if feedback == 'NV':
+            continue
+        else:
+            print("\nHere's your clue: {}\n".format(feedback))
+
+if __name__ == '__main__':
+    main()
