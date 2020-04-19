@@ -29,9 +29,9 @@
 from random import shuffle
 
 # Two useful variables for creating Cards.
-SUITES = 'H D S C'.split()
-RANKS = '2 3 4 5 6 7 8 9 10 J Q K A'.split()
-POINTS = {'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'J':10,'Q':10,'K':10,'A':11}
+SUITES = 'Hearts Diamonds Spades Clubs'.split()
+RANKS = '2 3 4 5 6 7 8 9 10 Jack Queen King Ace'.split()
+POINTS = {'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'Jack':10,'Queen':10,'King':10,'Ace':11}
 
 class Deck:
     """
@@ -40,12 +40,11 @@ class Deck:
     the players. It will use SUITE and RANKS to create the deck. It should also
     have a method for splitting/cutting the deck in half and Shuffling the deck.
     """
-    cards = []
-
     def __init__(self):
-        for suite in SUITES:
-            for rank in RANKS:
-                self.cards.append({'suite':suite,'rank':rank})
+        self.cards = [{'suite':s,'rank':r} for s in SUITES for r in RANKS]
+        # for suite in SUITES:
+        #     for rank in RANKS:
+        #         self.cards.append({'suite':suite,'rank':rank})
 
     def shuffle(self):
         shuffle(self.cards)
@@ -64,7 +63,8 @@ class Hand:
         self.hand_cards = hand_cards
 
     def add_cards(self, cards):
-        self.hand_cards.append(cards)
+        for i in range(len(cards)):
+            self.hand_cards.append(cards[i])
 
     def draw_card(self):
         return self.hand_cards.pop(0)
@@ -88,7 +88,7 @@ class Player:
 
     def play_cards(self, num_of_cards):
         cards_played = []
-        for i in range(0,num_of_cards):
+        for i in range(num_of_cards):
             cards_played.append(self.hand.draw_card())
         return cards_played
 
@@ -123,11 +123,11 @@ def main():
             break
 
         if task != 'draw' and task != 'check':
-            print('Not a valid input!')
+            print('\nNot a valid input!')
             continue
 
         if task == 'check':
-            print('You currently have {} cards left.\n'.format(player1.check_cards()))
+            print('\nYou currently have {} cards left.\n'.format(player1.check_cards()))
             continue
 
         if task == 'draw':
@@ -147,7 +147,7 @@ def main():
 
             else:
                 print("\nNOW IT'S WAR!!")
-                for i in range(0,4):
+                for i in range(4):
                     cards1.append(player1.play_cards(1)[0])
                     cards2.append(player2.play_cards(1)[0])
                 print('\n{} played a {} of {}.'.format(player1.name,cards1[4]['rank'],cards1[4]['suite']))
