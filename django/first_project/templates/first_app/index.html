@@ -1,12 +1,14 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>First App</title>
+    <title>All Might</title>
+    <link rel="stylesheet" href="{% static "css/mystyle.css" %}">
   </head>
   <body>
-    <h1>Hello, this is index.html!</h1>
-    {{ insert_me }}
+    <h1>Hello, this is All Might, the Symbol of Peace!</h1>
+    <img src="{% static "images/allmight.jpg" %}" alt="Uh Oh, didn't show!">
 
   </body>
 </html>
