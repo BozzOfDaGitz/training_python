@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>New User</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    <h3>Hello, please put in your data to register to the website!</h3>
+    <div class='container'>
+      <div class="jumbotron">
+        <form class="" method="post">
+        {{ user_form.as_p }}
+        {% csrf_token %}
+        <input type="submit" class='btn btn-primary' value="Submit">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
