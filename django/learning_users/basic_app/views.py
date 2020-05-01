@@ -7,8 +7,6 @@ def index(request):
 
 def register(request):
     registered = False
-    user_form = forms.UserForm()
-    profile_form = forms.UserProfileInfoForm()
 
     if request.method == 'POST':
         user_form = forms.UserForm(data=request.POST)
@@ -30,6 +28,9 @@ def register(request):
 
         else:
             print(user_form.errors,profile_form.errors)
+    else:
+        user_form = forms.UserForm()
+        profile_form = forms.UserProfileInfoForm()
 
     context_dict = {'user_form':user_form,'profile_form':profile_form,'registered':registered}
     return render(request,'basic_app/register.html',context=context_dict)
