@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 {% extends "basic_app/base.html" %}
+{% load my_extras %}
   {% block body_block %}
     <h1>Welcome to the index page!</h1>
     <a href="basic_app/relative">RELATIVE PAGE</a>
+    <h3>{{ text | upper }}</h3>
+    <h3>{{ text | cutty:"world" }}</h3>
+    <h3>{{ number | add:"99" }}</h3>
   {% endblock %}
