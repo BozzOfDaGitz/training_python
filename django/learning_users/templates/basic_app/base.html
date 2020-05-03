@@ -1,9 +1,11 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title>MY APP</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}">
   </head>
   <body>
     <nav class='navbar navbar-default navbar-static-top'>
@@ -12,6 +14,12 @@
           <li><a class="navbar-brand" href="{% url 'index' %}">DJANGO</a></li>
           <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
           <li><a class="navbar-link" href="{% url 'basic_app:register' %}">Register</a></li>
+          <!-- <li><a class="navbar-link" href="{% url 'basic_app:special' %}">Special Page (only if logged in!)</a></li> -->
+          {% if user.is_authenticated %}
+          <li><a class="navbar-link" href="{% url 'basic_app:logout' %}">Log Out</a></li>
+          {% else %}
+          <li><a class="navbar-link" href="{% url 'basic_app:login' %}">Log In</a></li>
+          {% endif %}
         </ul>
       </div>
     </nav>
