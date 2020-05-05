@@ -6,10 +6,17 @@
 <p>Name: {{ school.name }}</p>
 <p>Principal: {{ school.principal }}</p>
 <p>Location: {{ school.location }}</p>
+
 <h3>Students:</h3>
 
 {% for student in school.students.all %}
   <p>{{student.name}} who is {{student.age}} years old.</p>
+{% empty %}
+  <p>No students in this school.</p>
 {% endfor %}
+
+<div class="container">
+  <p><a class='btn btn-warning' href="{% url 'basic_app:update' pk=school.pk %}">Update</a></p>
+</div>
 
 {% endblock %}
