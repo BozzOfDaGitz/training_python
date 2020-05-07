@@ -2,16 +2,17 @@ from django.db import models
 from django.utils import timezone
 from django.urls import reverse
 
+
 # Create your models here.
 class Post(models.Model):
-    '''
+    """
     Posts that can be created and then published to the blog site.
-    '''
-    author = models.ForeignKey('auth.User')
-    title = models.CharField(length=200)
+    """
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
     text = models.TextField()
     create_date = models.DateTimeField(default=timezone.now())
-    published_date = models.DateTimeField(blank=True,null=True)
+    published_date = models.DateTimeField(blank=True, null=True)
 
     def publish(self):
         self.published_date = timezone.now()
@@ -21,19 +22,18 @@ class Post(models.Model):
         return self.comments.filter(approved_comment=True)
 
     def get_absolute_url(self):
-        return reverse('post_detail',kwargs={'pk':self.pk})
+        return reverse('post_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.title
 
 
-
 class Comment(models.Model):
-    '''
+    """
     Comments on certain blog posts.
     Anyone can comment, but they will have to be approved to be shown.
-    '''
-    post = models.ForeignKey('blog.Post',related_name='comments')
+    """
+    post = models.ForeignKey('blog.Post', related_name='comments', on_delete=models.CASCADE)
     author = models.CharField(max_length=200)
     text = models.TextField()
     create_date = models.DateTimeField(default=timezone.now())
