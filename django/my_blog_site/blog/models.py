@@ -1,6 +1,6 @@
 from django.db import models
-from django.utils import timezone
 from django.urls import reverse
+from django.utils import timezone
 
 
 # Create your models here.
@@ -43,7 +43,8 @@ class Comment(models.Model):
         self.approved_comment = True
         self.save()
 
-    def get_absolute_url(self):
+    @staticmethod
+    def get_absolute_url():
         return reverse('post_list')
 
     def __str__(self):
